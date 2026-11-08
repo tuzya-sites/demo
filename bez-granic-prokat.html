@@ -34,6 +34,11 @@ section{position:relative;overflow-x:clip}
 @media(max-width:700px){.fab{display:flex}.disc{padding-bottom:90px}}
 @media (prefers-reduced-motion:reduce){.js .sp>span,.js .fi,.js [data-r]{animation:none!important;opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}}
 :root{--bg:#F3F0E8;--bg2:#FFFFFF;--bg3:#E8E4D8;--fg:#10302E;--ac:#1E6B5C;--on:#fff;--acs:#1E6B5C1c;--line:#10302E1f;--hfg:#fff;--hov:linear-gradient(180deg,#0a1f1d22,#0a1f1dd9);--sumbg:#10302E;--sumfg:#F3F0E8;--fh:'Geologica',sans-serif;--fb:'Onest',sans-serif;--hw:800;--r:14px}
+.pick i{font-style:normal;margin-left:2px;opacity:.8;font-weight:800}
+.sum li{align-items:center}.sum li span{flex:1}
+.rm{flex:none;width:26px;height:26px;border-radius:50%;background:#ffffff1f;color:inherit;font:700 16px/1 sans-serif;display:grid;place-items:center;transition:background .2s,transform .2s}
+.rm:hover{background:#ff4d4d;color:#fff;transform:rotate(90deg)}
+
 .dl{display:flex;flex-direction:column;gap:6px}.dl span{font-size:13px;font-weight:700;opacity:.65;padding-left:4px}.dl input{min-height:54px}
 
 .have{margin-top:40px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:34px}
@@ -179,17 +184,22 @@ window.SITE=function(){var d=document,C=window.CFG,f=d.getElementById("cform");i
 var ul=d.getElementById('sl'),tot=d.getElementById('tot'),toast=d.querySelector('.toast');
 function fmt(n){return n.toLocaleString('ru-RU').replace(/ /g,' ')+' ₽'}
 f.querySelectorAll('.qty').forEach(function(q){var b=q.querySelector('b'),i=q.querySelector('input');q.querySelectorAll('button').forEach(function(x){x.onclick=function(e){e.preventDefault();var v=Math.max(0,(+i.value)+(+x.dataset.d));i.value=v;b.textContent=v;upd()}})});
-function data(){var L=[],sum=0;f.querySelectorAll('input[type=radio]:checked,input[type=checkbox]:checked').forEach(function(i){if(/^Не нужно/.test(i.dataset.l))return;var p=+i.dataset.p||0;sum+=p;L.push([i.dataset.l,p?fmt(p):''])});
-f.querySelectorAll('.qty input').forEach(function(i){var v=+i.value;if(v>0){var p=+i.dataset.p;sum+=p*v;L.push([i.dataset.l+' × '+v,fmt(p*v)])}});
+function data(){var L=[],sum=0;f.querySelectorAll('input[type=radio]:checked,input[type=checkbox]:checked').forEach(function(i){if(/^Не нужно/.test(i.dataset.l))return;var p=+i.dataset.p||0;sum+=p;L.push([i.dataset.l,p?fmt(p):'',i])});
+f.querySelectorAll('.qty input').forEach(function(i){var v=+i.value;if(v>0){var p=+i.dataset.p;sum+=p*v;L.push([i.dataset.l+' × '+v,fmt(p*v),i])}});
 var F=[];f.querySelectorAll('[data-f]').forEach(function(i){var v=i.value;if(!v)return;if(i.type=='date'){var p=v.split('-');v=p[2]+'.'+p[1]+'.'+p[0]}F.push([i.dataset.f,v])});return{L:L,F:F,sum:sum}}
-function upd(){var x=data();ul.innerHTML=x.L.length?x.L.map(function(r){return'<li><span>'+r[0]+'</span><b>'+r[1]+'</b></li>'}).join(''):'<li><span>'+C.empty+'</span></li>';tot.textContent=fmt(x.sum);var dt=d.getElementById('dtot');if(dt)dt.textContent=x.sum?fmt(x.sum):''}
+var CUR=[];
+function rm(i){if(i.type=='hidden'){i.value=0;i.parentElement.querySelector('b').textContent=0}else if(i.type=='radio'){var no=[].find.call(f.querySelectorAll('input[name="'+i.name+'"]'),function(x){return /^Не нужно/.test(x.dataset.l)});if(no)no.checked=true;else i.checked=false}else i.checked=false;upd()}
+function isOn(v){if(v.indexOf('f:')==0){var kv=v.slice(2).split('='),el=f.querySelector('[data-f="'+kv[0]+'"]');return el&&el.value==kv[1]}var i=[].find.call(f.querySelectorAll('input'),function(x){return x.dataset.l==v});return i&&(i.type=='hidden'?+i.value>0:i.checked)}
+function sync(){d.querySelectorAll('[data-pick]').forEach(function(b){var on=isOn(b.dataset.pick);b.classList.toggle('ok',on);b.innerHTML=on?'<b>✓</b> В заявке <i>×</i>':'<b>+</b> В заявку';b.title=on?'Нажмите, чтобы убрать':''})}
+function upd(){var x=data();CUR=x.L;ul.innerHTML=x.L.length?x.L.map(function(r,k){return'<li><span>'+r[0]+'</span><b>'+r[1]+'</b><button type="button" class="rm" data-rm="'+k+'" aria-label="Убрать">×</button></li>'}).join(''):'<li><span>'+C.empty+'</span></li>';tot.textContent=fmt(x.sum);var dt=d.getElementById('dtot');if(dt)dt.textContent=x.sum?fmt(x.sum):'';sync()}
+ul.addEventListener('click',function(e){var b=e.target.closest('[data-rm]');if(!b)return;var r=CUR[+b.dataset.rm];if(r){rm(r[2]);show('Убрано из заявки')}});
 function msg(){var x=data(),t=C.hello+'\n\n';x.L.forEach(function(r){t+='• '+r[0]+(r[1]?' ('+r[1]+')':'')+'\n'});x.F.forEach(function(r){t+=r[0].replace('Ваше имя','Имя')+': '+r[1]+'\n'});if(x.sum)t+='\nСумма по прайсу: '+fmt(x.sum)+'\n';t+='\nЗаявка с сайта';return t.trim()}
 function show(s){toast.textContent=s;toast.classList.add('on');setTimeout(function(){toast.classList.remove('on')},3800)}
 f.addEventListener('change',upd);
-d.querySelectorAll('[data-pick]').forEach(function(b){b.onclick=function(){var v=b.dataset.pick;
-if(v.indexOf('f:')==0){var kv=v.slice(2).split('='),el=f.querySelector('[data-f="'+kv[0]+'"]');if(el)el.value=kv[1]}
-else{var i=[].find.call(f.querySelectorAll('input'),function(x){return x.dataset.l==v});if(i){if(i.type=='hidden'){i.value=+i.value+1;i.parentElement.querySelector('b').textContent=i.value}else i.checked=true;var o=i.closest('.opt');if(o){o.classList.remove('fl');void o.offsetWidth;o.classList.add('fl')}}}
-upd();b.classList.add('ok');b.innerHTML='<b>✓</b> Добавлено';setTimeout(function(){b.classList.remove('ok');b.innerHTML='<b>+</b> В заявку'},1800);show('Добавлено в заявку. Сумма внизу экрана')}});
+d.querySelectorAll('[data-pick]').forEach(function(b){b.onclick=function(){var v=b.dataset.pick,on=isOn(v);
+if(v.indexOf('f:')==0){var kv=v.slice(2).split('='),el=f.querySelector('[data-f="'+kv[0]+'"]');if(el)el.value=on?'':kv[1];upd()}
+else{var i=[].find.call(f.querySelectorAll('input'),function(x){return x.dataset.l==v});if(!i)return;if(on){rm(i)}else{if(i.type=='hidden'){i.value=+i.value+1;i.parentElement.querySelector('b').textContent=i.value}else i.checked=true;var o=i.closest('.opt');if(o){o.classList.remove('fl');void o.offsetWidth;o.classList.add('fl')}upd()}}
+show(on?'Убрано из заявки':'Добавлено в заявку. Сумма внизу экрана')}});
 var dock=d.querySelector('.dock'),hero=d.querySelector('.hero'),cs=d.getElementById('calc');
 addEventListener('scroll',function(){var h=hero.getBoundingClientRect().bottom<80,r=cs.getBoundingClientRect(),inC=r.top<innerHeight*.6&&r.bottom>innerHeight*.4;dock.classList.toggle('on',h&&!inC)},{passive:true});f.addEventListener('input',upd);upd();
 d.querySelectorAll('[data-send]').forEach(function(b){b.onclick=function(e){e.preventDefault();var m=msg(),k=b.dataset.send;
