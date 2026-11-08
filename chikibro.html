@@ -34,6 +34,14 @@ section{position:relative;overflow-x:clip}
 @media(max-width:700px){.fab{display:flex}.disc{padding-bottom:90px}}
 @media (prefers-reduced-motion:reduce){.js .sp>span,.js .fi,.js [data-r]{animation:none!important;opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}}
 :root{--bg:#0B0B0F;--bg2:#15151B;--bg3:#101015;--fg:#F4F4F6;--ac:#FF2E4D;--on:#fff;--acs:#FF2E4D24;--line:#ffffff1c;--hfg:#fff;--hov:linear-gradient(180deg,#0b0b0f33,#0b0b0fee);--sumbg:#FF2E4D;--sumfg:#fff;--fh:'Unbounded',sans-serif;--fb:'Manrope',sans-serif;--hw:800;--r:22px}
+.dl{display:flex;flex-direction:column;gap:6px}.dl span{font-size:13px;font-weight:700;opacity:.65;padding-left:4px}.dl input{min-height:54px}
+
+.have{margin-top:40px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:34px}
+.have h3{font-size:28px;margin-bottom:22px}.have ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px 24px}
+.have li{display:flex;align-items:center;gap:12px;font-weight:600}
+.have li:before{content:'';flex:none;width:24px;height:24px;border-radius:50%;background:var(--ac) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+@media(max-width:560px){.have{padding:24px}.have ul{grid-template-columns:1fr 1fr;gap:12px}.have li{font-size:15px}}
+
 .fab{display:none!important}
 .rnd{display:inline-flex;align-items:center;gap:10px}.rnd em{font-style:normal;font-size:14px;opacity:.75;margin-left:4px}
 .ri{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;color:#fff;transition:transform .25s cubic-bezier(.2,.8,.2,1)}
@@ -72,7 +80,7 @@ section{position:relative;overflow-x:clip}
 .sk-neon .opt{border-radius:16px}.sk-neon .opt:has(input:checked){box-shadow:0 0 24px -6px #FF2E4D}
 .sk-neon .sum .btn{border-radius:999px}
 /* skin: trail (прокат) */
-.sk-trail .btn{border-radius:14px 4px 14px 4px;font-family:var(--fh);font-style:italic;font-weight:800}
+.sk-trail .btn{border-radius:14px 4px 14px 4px;font-family:var(--fh);font-weight:700}
 .sk-trail .b1{background:linear-gradient(135deg,#1E6B5C,#2F8F6F);box-shadow:0 14px 30px -12px #1E6B5C}
 .sk-trail .b1 .ar{background:#D7F75B;color:#10302E;border-radius:10px 3px 10px 3px}
 .sk-trail .hero .b2{background:#D7F75B;color:#10302E;border:0}
