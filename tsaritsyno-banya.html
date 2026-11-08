@@ -173,9 +173,9 @@ function fmt(n){return n.toLocaleString('ru-RU').replace(/ /g,' ')+' ₽'}
 f.querySelectorAll('.qty').forEach(function(q){var b=q.querySelector('b'),i=q.querySelector('input');q.querySelectorAll('button').forEach(function(x){x.onclick=function(e){e.preventDefault();var v=Math.max(0,(+i.value)+(+x.dataset.d));i.value=v;b.textContent=v;upd()}})});
 function data(){var L=[],sum=0;f.querySelectorAll('input[type=radio]:checked,input[type=checkbox]:checked').forEach(function(i){if(/^Не нужно/.test(i.dataset.l))return;var p=+i.dataset.p||0;sum+=p;L.push([i.dataset.l,p?fmt(p):''])});
 f.querySelectorAll('.qty input').forEach(function(i){var v=+i.value;if(v>0){var p=+i.dataset.p;sum+=p*v;L.push([i.dataset.l+' × '+v,fmt(p*v)])}});
-var F=[];f.querySelectorAll('[data-f]').forEach(function(i){if(i.value)F.push([i.dataset.f,i.value])});return{L:L,F:F,sum:sum}}
+var F=[];f.querySelectorAll('[data-f]').forEach(function(i){var v=i.value;if(!v)return;if(i.type=='date'){var p=v.split('-');v=p[2]+'.'+p[1]+'.'+p[0]}F.push([i.dataset.f,v])});return{L:L,F:F,sum:sum}}
 function upd(){var x=data();ul.innerHTML=x.L.length?x.L.map(function(r){return'<li><span>'+r[0]+'</span><b>'+r[1]+'</b></li>'}).join(''):'<li><span>'+C.empty+'</span></li>';tot.textContent=fmt(x.sum);var dt=d.getElementById('dtot');if(dt)dt.textContent=x.sum?fmt(x.sum):''}
-function msg(){var x=data(),t=C.hello+'\n';x.L.forEach(function(r){t+='• '+r[0]+(r[1]?' ('+r[1]+')':'')+'\n'});x.F.forEach(function(r){t+=r[0]+': '+r[1]+'\n'});if(x.sum)t+=C.sumlabel+': '+fmt(x.sum)+'\n';return t.trim()}
+function msg(){var x=data(),t=C.hello+'\n\n';x.L.forEach(function(r){t+='• '+r[0]+(r[1]?' ('+r[1]+')':'')+'\n'});x.F.forEach(function(r){t+=r[0].replace('Ваше имя','Имя')+': '+r[1]+'\n'});if(x.sum)t+='\nСумма по прайсу: '+fmt(x.sum)+'\n';t+='\nЗаявка с сайта';return t.trim()}
 function show(s){toast.textContent=s;toast.classList.add('on');setTimeout(function(){toast.classList.remove('on')},3800)}
 f.addEventListener('change',upd);
 d.querySelectorAll('[data-pick]').forEach(function(b){b.onclick=function(){var v=b.dataset.pick;
@@ -186,7 +186,7 @@ var dock=d.querySelector('.dock'),hero=d.querySelector('.hero'),cs=d.getElementB
 addEventListener('scroll',function(){var h=hero.getBoundingClientRect().bottom<80,r=cs.getBoundingClientRect(),inC=r.top<innerHeight*.6&&r.bottom>innerHeight*.4;dock.classList.toggle('on',h&&!inC)},{passive:true});f.addEventListener('input',upd);upd();
 d.querySelectorAll('[data-send]').forEach(function(b){b.onclick=function(e){e.preventDefault();var m=msg(),k=b.dataset.send;
 if(k=='wa'){open('https://wa.me/'+C.wa+'?text='+encodeURIComponent(m),'_blank')}
-else if(k=='tg'){try{navigator.clipboard.writeText(m)}catch(_){}show('Текст заявки скопирован. Вставьте его в чат Telegram');setTimeout(function(){open(C.tg+(C.tgtext?'?text='+encodeURIComponent(m):''),'_blank')},700)}
+else if(k=='tg'){try{navigator.clipboard.writeText(m)}catch(_){}open(C.tg+'?text='+encodeURIComponent(m),'_blank')}
 else if(k=='copy'){try{navigator.clipboard.writeText(m)}catch(_){}show('Текст заявки скопирован')}}})};
 </script><script>
 (function(){var d=document,b=d.body;
