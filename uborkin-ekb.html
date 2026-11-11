@@ -367,6 +367,21 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
   .hero h1{font-size:46px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* game v2 */
+.game{touch-action:pan-y}
+.game canvas{pointer-events:none;cursor:auto}
+.hit{position:absolute;left:9%;right:9%;top:17%;bottom:13%;z-index:3;touch-action:none;cursor:none;-webkit-tap-highlight-color:transparent}
+@media (max-width:980px){.hit{left:13%;right:13%}}
+.sponge.t-svg{width:84px;height:84px;background:none;box-shadow:none;border-radius:0;transform:translate(-14%,-86%);filter:drop-shadow(0 8px 8px #0003)}
+.sponge.t-svg svg{width:100%;height:100%;display:block;overflow:visible}
+.sponge.t-rag{transform:translate(-50%,-50%) rotate(-8deg)}
+.sponge.t-mop{transform:translate(-40%,-88%)}
+.sponge.t-wrench{transform:translate(-21%,-79%)}
+.sponge.t-driver{transform:translate(-12%,-88%)}
+.sponge.t-spray{transform:translate(-26%,-25%)}
+.pf{position:absolute;pointer-events:none;z-index:3;font-style:normal;line-height:1;animation:pfly .9s ease-out forwards}
+@keyframes pfly{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot)) scale(var(--sc));opacity:0}}
 </style>
 <style>:root{--lime:#9BE7FF;--mint:#CDEFFF;--mint2:#EAF8FF;--ink:#0E2340;--ink2:#1f3a5f}</style>
 </head>
@@ -417,20 +432,20 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
     <div class="game" id="game">
       <div class="hud"><span class="t" id="gT"></span><span class="r"><span class="meter"><i id="gM"></i></span><button class="reset" id="gR" aria-label="Заново" title="Заново">↻</button></span></div><div class="say" id="say"></div>
       <svg class="base" viewBox="0 0 400 230" aria-hidden="true"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FD8FF"/><stop offset="1" stop-color="#E6F6FF"/></linearGradient></defs>
-<ellipse cx="200" cy="222" rx="160" ry="7" fill="#0e234022"/>
-<rect x="85" y="4" width="230" height="190" rx="16" fill="#fff" stroke="#0E2340" stroke-width="4"/>
-<rect x="100" y="18" width="94" height="162" rx="8" fill="url(#sky)" stroke="#0E2340" stroke-width="3"/>
-<rect x="206" y="18" width="94" height="162" rx="8" fill="url(#sky)" stroke="#0E2340" stroke-width="3"/>
-<circle cx="262" cy="52" r="18" fill="#FFD84D"/>
-<path d="M100 150 q25 -22 50 -6 q22 -18 44 0 v36 h-94z M206 156 q30 -24 60 -4 q18 -10 34 2 v26 h-94z" fill="#7BD389"/>
-<rect x="70" y="190" width="260" height="20" rx="8" fill="#fff" stroke="#0E2340" stroke-width="4"/>
-<circle cx="200" cy="99" r="4" fill="#0E2340"/></svg>
+<ellipse cx="200" cy="224" rx="185" ry="6" fill="#0e234022"/>
+<rect x="22" y="2" width="356" height="196" rx="16" fill="#fff" stroke="#0E2340" stroke-width="4"/>
+<rect x="38" y="16" width="156" height="168" rx="8" fill="url(#sky)" stroke="#0E2340" stroke-width="3"/>
+<rect x="206" y="16" width="156" height="168" rx="8" fill="url(#sky)" stroke="#0E2340" stroke-width="3"/>
+<circle cx="316" cy="52" r="20" fill="#FFD84D"/>
+<path d="M38 150 q40 -26 80 -6 q36 -20 76 0 v40 h-156z M206 156 q46 -26 96 -4 q30 -12 60 2 v30 h-156z" fill="#7BD389"/>
+<rect x="6" y="194" width="388" height="20" rx="8" fill="#fff" stroke="#0E2340" stroke-width="4"/>
+<circle cx="200" cy="100" r="4" fill="#0E2340"/></svg>
       <canvas id="dirt"></canvas>
       <svg class="face" viewBox="0 0 400 230" aria-hidden="true"><g id="eyes"><ellipse cx="172" cy="92" rx="15" ry="17" fill="#fff" stroke="#0F2A25" stroke-width="3.5"/><ellipse cx="228" cy="92" rx="15" ry="17" fill="#fff" stroke="#0F2A25" stroke-width="3.5"/>
 <circle class="pupil" cx="174" cy="95" r="7" fill="#0F2A25"/><circle class="pupil" cx="230" cy="95" r="7" fill="#0F2A25"/>
 <circle cx="177" cy="91" r="2.4" fill="#fff"/><circle cx="233" cy="91" r="2.4" fill="#fff"/></g><ellipse cx="150" cy="115" rx="10" ry="5" fill="#FF9A8A" opacity=".55"/><ellipse cx="250" cy="115" rx="10" ry="5" fill="#FF9A8A" opacity=".55"/><path id="mouth" d="M186 120 Q200 112 214 120" fill="none" stroke="#0F2A25" stroke-width="3.5" stroke-linecap="round"/></svg>
       <div class="sponge" id="sponge"></div>
-      <div class="hint" id="gH">Зажмите и водите тряпкой по стеклу</div>
+      <div class="hint" id="gH">Зажмите и водите тряпочкой по стеклу</div>
       <div class="done" id="gDone"><div><b>Чисто!</b>Так же будет у вас дома<br><a href="#price">Собрать заказ →</a></div></div>
     </div>
   </div>
@@ -544,6 +559,8 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
 const CFG={"wa": "", "svc": [{"id": "s0", "t": "Поддерживающая уборка", "p": 4800, "pcs": false, "flag": true, "img": "https://cachizer1.2gis.com/market/b3feb4e5-9f31-479b-bae0-f2fca51d0e88.jpg?h={height}&w={width}", "d": "Цена «от» по прайсу в 2ГИС. Точную сумму назовут по вашей задаче.", "from": 1}, {"id": "s1", "t": "Мойка окон, балконов", "p": 300, "pcs": true, "flag": false, "img": "https://cachizer2.2gis.com/market/1aa1efb6-9753-4c91-9cc4-bcaa3c4501d6.jpg?h={height}&w={width}", "d": "Цена за 1 шт. по прайсу в 2ГИС.", "from": 0}, {"id": "s2", "t": "Химчистка мебели, портьер, штор", "p": 500, "pcs": false, "flag": true, "img": "https://cachizer1.2gis.com/market/48051712-a40e-418b-811a-ecd841f9afd1.jpg?h={height}&w={width}", "d": "Цена «от» по прайсу в 2ГИС. Точную сумму назовут по вашей задаче.", "from": 1}, {"id": "s3", "t": "Озонирование", "p": 2000, "pcs": false, "flag": true, "img": "https://cachizer2.2gis.com/market/c0ac0e62-11bf-4128-b57f-e27743b66721.jpg?h={height}&w={width}", "d": "Цена «от» по прайсу в 2ГИС. Точную сумму назовут по вашей задаче.", "from": 1}, {"id": "s4", "t": "Очистка кровли от снега и наледи", "p": 400, "pcs": false, "flag": true, "img": "https://cachizer1.2gis.com/market/4a0ef113-e769-4cbb-b67b-3635bc49e600.jpg?h={height}&w={width}", "d": "Цена «от» по прайсу в 2ГИС. Точную сумму назовут по вашей задаче.", "from": 1}], "rev": [["Ольга Палкина", "05.11.2026", "Обратились в клининговую компанию для химчистки дивана и кровати, результат превзошёл ожидания. Специалист отлично справился, все загрязнения удалены, мебель выглядит как новая.", []], ["Марта Светланина", "31.10.2026", "Большое спасибо Анастасии! Окна идеально чистые! Сразу стало светло и позитивно", []], ["Городской житель", "01.11.2026", "Заказывала генеральную уборку квартиры 80 квадратов. Приехала менеджер Олеся и 2 девушки. Все очень понравилось, буду обязательно еще обращаться.", []]], "gal": [], "marq": ["Генеральная уборка", "После ремонта", "Мытьё окон", "Химчистка", "Выезд по Екатеринбургу"], "greet": "Здравствуйте! Хочу оставить заявку:", "who": "Менеджер", "whoF": false, "city": "Екатеринбург", "exnote": "2-комнатная квартира, 54 м²", "ex": [["s0", 1], ["s1", 2]], "ic": "🧽", "game": {"rects": [[100, 18, 94, 162, 8], [206, 18, 94, 162, 8]], "seedR": [0, 1, 0, 1, 0, 1, 0, 1, 0], "col": ["#7d7a6e", "#8f8a7a", "#6b6a60", "#9a9282"], "say": [[0, "Ничего не вижу! 🙈"], [25, "О, солнышко проглядывает!"], [55, "Ещё вот тут разводы!"], [80, "Почти блестит! ✨"]], "fin": "Вот это вид! Спасибо! ☀️", "t0": "Протрите окно 👆", "fc": [200, 92], "mouths": ["M186 120 Q200 112 214 120", "M186 117 Q200 120 214 117", "M184 115 Q200 126 216 115", "M182 113 Q200 132 218 113"], "crack": false, "bug": false}};
 const WA=CFG.wa,SVC=CFG.svc,REV=CFG.rev,GAL=CFG.gal;
 const IMG=s=>s.replace('{height}','600').replace('{width}','800');
+Object.assign(CFG.game,{"tool": "rag", "fx": "foam", "rects": [[38, 16, 156, 168, 8], [206, 16, 156, 168, 8]]});
+(()=>{const M=[[/диван|мебел/i,'🛋️'],[/кресл|стул|пуф/i,'🪑'],[/матрас|кроват/i,'🛏️'],[/ковр|ковёр|ковер|ворс/i,'🧶'],[/окн|остекл|створ|балкон|фасад/i,'🪟'],[/штор|тюл/i,'🪟'],[/стирал|люк|барабан|подшипник|манжет|шланг|насос|фильтр|тэн|ремн|амортизатор|протеч/i,'🧺'],[/холодил/i,'🧊'],[/посудомо|посуд/i,'🍽️'],[/кофе/i,'☕'],[/телевиз|подсветк/i,'📺'],[/ноутбук|матриц|клавиатур|windows|ос |систем/i,'💻'],[/компьютер|пк|видеокарт|ssd/i,'🖥️'],[/аккумулятор|батаре/i,'🔋'],[/экран|диспле|стекл|смартфон|телефон|iphone|android|камер|разъ/i,'📱'],[/диагност/i,'🔍'],[/пылесос/i,'🧹'],[/свч|микроволн|духов|плит|варочн|гриль/i,'🍳'],[/утюг|парогенератор|фен/i,'💨'],[/кондиционер|вытяж/i,'❄️'],[/водонагрев|бойлер/i,'🚿'],[/таракан|клоп|муравь|мокриц|насеком|клещ|комар/i,'🪳'],[/мыш|крыс|грызун/i,'🐭'],[/запах|озон/i,'🌬️'],[/ремонт.*(дрел|перфоратор|болгарк|шуруповёрт|шуруповерт|молотк|пил|триммер)|садов|снегоубор|культиватор|мойк/i,'🛠️'],[/после ремонта|строит/i,'🧱'],[/генеральн/i,'✨'],[/уборк|клининг/i,'🧽'],[/выезд/i,'🚗'],[/перенос данных|прошивк|разблокир/i,'💾']];SVC.forEach(s=>{if(s.img||s.ic)return;const m=M.find(a=>a[0].test(s.t));if(m)s.ic=m[1]})})();
 const rub=n=>Math.round(n).toLocaleString('ru-RU').replace(/ /g,' ')+' ₽';
 const $=s=>document.querySelector(s);
 const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -671,36 +688,59 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 const navs=[...document.querySelectorAll('.rail nav a')];const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)navs.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});['price','zayavka','otzyvy','kontakty'].forEach(id=>io2.observe(document.getElementById(id)));
 if(matchMedia('(pointer:fine)').matches)document.querySelectorAll('.mag').forEach(b=>{b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.18}px,${(e.clientY-r.top-r.height/2)*.25}px)`});b.addEventListener('mouseleave',()=>b.style.transform='')});
 
-/* ---------- мини-игра: протри диван ---------- */
+/* ---------- мини-игра v2 ---------- */
 (()=>{const g=$('#game'),cv=$('#dirt'),x=cv.getContext('2d'),sp=$('#sponge'),sofa=g.querySelector('svg.base'),say=$('#say'),mouth=$('#mouth');
- const G=CFG.game,RECTS=G.rects;
- let W,H,dpr,ox,oy,sc,total=1,done=false,down=false,last=null,tick=0,pct=0,said=-1,st=[];
- const SAY=G.say;
- const MOUTH=G.mouths;
+ const G=CFG.game,RECTS=G.rects,TOOL=G.tool||'sponge',FX=G.fx||'foam';
+ const TOOLS={
+  mop:'<svg viewBox="0 0 84 84"><path d="M72 6 34 58" stroke="#2B1E16" stroke-width="9" stroke-linecap="round"/><path d="M72 6 34 58" stroke="#C8875B" stroke-width="5" stroke-linecap="round"/><g stroke="#FFD166" stroke-width="5" stroke-linecap="round"><path d="M12 70v10M20 70v12M28 70v10M36 70v12M44 70v10M52 70v12M60 70v10"/></g><rect x="6" y="54" width="60" height="16" rx="7" fill="#2B1E16"/><rect x="10" y="57" width="52" height="5" rx="2.5" fill="#5a4334"/></svg>',
+  rag:'<svg viewBox="0 0 84 84"><path d="M8 30Q22 12 40 22 58 8 76 26 82 46 70 60 52 74 34 62 16 72 6 52Z" fill="#7CCBFF" stroke="#0E2340" stroke-width="3.5" stroke-linejoin="round"/><path d="M22 34q10 8 22 2M40 48q10 6 20-2" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/></svg>',
+  wrench:'<svg viewBox="0 0 84 84"><path d="M28 56 68 16" stroke="#1E1A2E" stroke-width="16" stroke-linecap="round"/><path d="M32 72A15 15 0 1 1 12 52" fill="none" stroke="#1E1A2E" stroke-width="15" stroke-linecap="round"/><path d="M28 56 68 16" stroke="#C3CAD6" stroke-width="10" stroke-linecap="round"/><path d="M32 72A15 15 0 1 1 12 52" fill="none" stroke="#C3CAD6" stroke-width="9" stroke-linecap="round"/><path d="M34 50 62 22" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/><circle cx="68" cy="16" r="3.5" fill="#1E1A2E"/></svg>',
+  driver:'<svg viewBox="0 0 84 84"><path d="M12 72 46 38" stroke="#18122B" stroke-width="8" stroke-linecap="round"/><path d="M12 72 46 38" stroke="#D5DAE3" stroke-width="4" stroke-linecap="round"/><path d="M48 36 70 14" stroke="#18122B" stroke-width="20" stroke-linecap="round"/><path d="M48 36 70 14" stroke="#7B5CFF" stroke-width="14" stroke-linecap="round"/><path d="M50 30 66 14" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".55"/><path d="M8 76l6-2-4-4z" fill="#18122B"/></svg>',
+  spray:'<svg viewBox="0 0 84 84"><g fill="#fff" opacity=".9"><circle cx="14" cy="14" r="3"/><circle cx="8" cy="24" r="2.5"/><circle cx="16" cy="28" r="2"/><circle cx="4" cy="14" r="2"/></g><rect x="26" y="17" width="12" height="7" rx="2" fill="#2A1210"/><rect x="36" y="14" width="18" height="14" rx="4" fill="#fff" stroke="#2A1210" stroke-width="3"/><rect x="30" y="28" width="30" height="50" rx="8" fill="#FF7A59" stroke="#2A1210" stroke-width="3.5"/><rect x="36" y="42" width="18" height="18" rx="4" fill="#fff" opacity=".85"/></svg>'};
+ if(TOOLS[TOOL]){sp.className='sponge t-svg t-'+TOOL;sp.innerHTML=TOOLS[TOOL]}
+ const hit=document.createElement('div');hit.className='hit';g.appendChild(hit);
+ let W=0,H,dpr,ox,oy,sc,done=false,down=false,last=null,pct=0,said=-1,st=[],P=[],left=0,total=1;
+ const SAY=G.say,MOUTH=G.mouths;
  function geo(){const g0=g.getBoundingClientRect(),s0=sofa.getBoundingClientRect();W=g0.width;H=g0.height;sc=s0.width/400;ox=s0.left-g0.left;oy=s0.top-g0.top;dpr=Math.min(2,devicePixelRatio||1);cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
  function clip(){x.beginPath();RECTS.forEach(([a,b,w,h,r])=>x.roundRect(ox+a*sc,oy+b*sc,w*sc,h*sc,r*sc))}
- function seed(){st=[];const R=(a,b)=>a+Math.random()*(b-a);for(let i=0;i<9;i++){const rc=RECTS[G.seedR[i%G.seedR.length]];st.push({vx:R(rc[0]+12,rc[0]+rc[2]-12),vy:R(rc[1]+10,rc[1]+rc[3]-10),r:R(14,26),c:G.col[i%G.col.length],n:Math.floor(R(4,7)),k:Math.random()})}}
+ function seed(){st=[];const R=(a,b)=>a+Math.random()*(b-a);for(let i=0;i<9;i++){const rc=RECTS[G.seedR[i%G.seedR.length]];st.push({vx:R(rc[0]+14,rc[0]+rc[2]-14),vy:R(rc[1]+12,rc[1]+rc[3]-12),r:R(14,26),c:G.col[i%G.col.length],n:Math.floor(R(4,7)),k:Math.random()})}}
  function paint(){x.clearRect(0,0,W,H);x.save();clip();x.clip();
-  if(G.bug){st.forEach(s=>{const cx0=ox+s.vx*sc,cy0=oy+s.vy*sc,a=s.k*6.28,L=11*sc;x.save();x.translate(cx0,cy0);x.rotate(a);x.strokeStyle='#3a2416';x.lineWidth=1.6*sc;for(let k=-1;k<=1;k++){x.beginPath();x.moveTo(-2*sc,k*3*sc);x.lineTo(-9*sc,k*8*sc);x.moveTo(2*sc,k*3*sc);x.lineTo(9*sc,k*8*sc);x.stroke()}x.beginPath();x.moveTo(0,-L);x.lineTo(-5*sc,-L-8*sc);x.moveTo(0,-L);x.lineTo(5*sc,-L-8*sc);x.stroke();x.fillStyle='#5a3418';x.beginPath();x.ellipse(0,0,6*sc,L,0,0,6.28);x.fill();x.fillStyle='#8a5a2e';x.beginPath();x.ellipse(-1.5*sc,-2*sc,2*sc,L*.6,0,0,6.28);x.fill();x.restore()})}else if(G.crack){x.lineCap='round';st.forEach((s,si)=>{let sv=s.k;const rnd=()=>{sv=(sv*9301+49297)%233280/233280;return sv};const cx0=ox+s.vx*sc,cy0=oy+s.vy*sc;for(let b=0;b<6;b++){let px=cx0,py=cy0,a=rnd()*6.28;x.beginPath();x.moveTo(px,py);for(let k=0;k<5;k++){a+=(rnd()-.5)*1.1;const L=(10+rnd()*22)*sc;px+=Math.cos(a)*L;py+=Math.sin(a)*L;x.lineTo(px,py)}x.strokeStyle='rgba(30,40,45,.85)';x.lineWidth=2.6*sc;x.stroke();x.strokeStyle='rgba(255,255,255,.7)';x.lineWidth=1*sc;x.stroke()}x.fillStyle='rgba(30,40,45,.25)';x.beginPath();x.arc(cx0,cy0,9*sc,0,6.28);x.fill()})}else st.forEach(s=>{let seedv=s.k;const rnd=()=>{seedv=(seedv*9301+49297)%233280/233280;return seedv};for(let i=0;i<s.n;i++){const a=rnd()*6.28,d=rnd()*s.r*.7*sc,rr=s.r*sc*(.5+rnd()*.6);const gx=ox+s.vx*sc+Math.cos(a)*d,gy=oy+s.vy*sc+Math.sin(a)*d;const gr=x.createRadialGradient(gx,gy,0,gx,gy,rr);gr.addColorStop(0,s.c+'d0');gr.addColorStop(.55,s.c+'70');gr.addColorStop(1,s.c+'00');x.fillStyle=gr;x.beginPath();x.arc(gx,gy,rr,0,6.28);x.fill()}});
-  x.fillStyle='#8b6b4520';x.fill();x.restore();total=count()||1}
- function count(){const d=x.getImageData(0,0,cv.width,cv.height).data;let n=0;for(let i=3;i<d.length;i+=48)if(d[i]>40)n++;return n}
+  if(G.bug){st.forEach(s=>{const cx0=ox+s.vx*sc,cy0=oy+s.vy*sc,a=s.k*6.28,L=11*sc;x.save();x.translate(cx0,cy0);x.rotate(a);x.strokeStyle='#3a2416';x.lineWidth=1.6*sc;for(let k=-1;k<=1;k++){x.beginPath();x.moveTo(-2*sc,k*3*sc);x.lineTo(-9*sc,k*8*sc);x.moveTo(2*sc,k*3*sc);x.lineTo(9*sc,k*8*sc);x.stroke()}x.beginPath();x.moveTo(0,-L);x.lineTo(-5*sc,-L-8*sc);x.moveTo(0,-L);x.lineTo(5*sc,-L-8*sc);x.stroke();x.fillStyle='#5a3418';x.beginPath();x.ellipse(0,0,6*sc,L,0,0,6.28);x.fill();x.fillStyle='#8a5a2e';x.beginPath();x.ellipse(-1.5*sc,-2*sc,2*sc,L*.6,0,0,6.28);x.fill();x.restore()})}
+  else if(G.crack){x.lineCap='round';st.forEach(s=>{let sv=s.k;const rnd=()=>{sv=(sv*9301+49297)%233280/233280;return sv};const cx0=ox+s.vx*sc,cy0=oy+s.vy*sc;for(let b=0;b<6;b++){let px=cx0,py=cy0,a=rnd()*6.28;x.beginPath();x.moveTo(px,py);for(let k=0;k<5;k++){a+=(rnd()-.5)*1.1;const L=(8+rnd()*18)*sc;px+=Math.cos(a)*L;py+=Math.sin(a)*L;x.lineTo(px,py)}x.strokeStyle='rgba(30,40,45,.85)';x.lineWidth=2.6*sc;x.stroke();x.strokeStyle='rgba(255,255,255,.7)';x.lineWidth=1*sc;x.stroke()}x.fillStyle='rgba(30,40,45,.3)';x.beginPath();x.arc(cx0,cy0,9*sc,0,6.28);x.fill()})}
+  else st.forEach(s=>{let seedv=s.k;const rnd=()=>{seedv=(seedv*9301+49297)%233280/233280;return seedv};for(let i=0;i<s.n;i++){const a=rnd()*6.28,d=rnd()*s.r*.7*sc,rr=s.r*sc*(.5+rnd()*.6);const gx=ox+s.vx*sc+Math.cos(a)*d,gy=oy+s.vy*sc+Math.sin(a)*d;const gr=x.createRadialGradient(gx,gy,0,gx,gy,rr);gr.addColorStop(0,s.c+'d0');gr.addColorStop(.55,s.c+'70');gr.addColorStop(1,s.c+'00');x.fillStyle=gr;x.beginPath();x.arc(gx,gy,rr,0,6.28);x.fill()}});
+  x.restore();
+  /* точки грязи считаем один раз, а не на каждое движение */
+  P=[];try{const d=x.getImageData(0,0,cv.width,cv.height).data,cw=cv.width,stp=4;for(let py=0;py<H;py+=stp)for(let px=0;px<W;px+=stp){if(d[((py*dpr|0)*cw+(px*dpr|0))*4+3]>40)P.push([px,py,1])}}catch(e){}
+  total=left=P.length||1}
  function talk(t){say.textContent=t;say.classList.remove('on');void say.offsetWidth;say.classList.add('on')}
  function mood(){let m=0;SAY.forEach((s,i)=>{if(pct>=s[0])m=i});mouth.setAttribute('d',done?MOUTH[3]:MOUTH[m]);if(m!==said&&!done){said=m;talk(SAY[m][1])}}
- function foam(px,py){if(Math.random()>.35)return;const f=document.createElement('i');f.className='foam';const s=6+Math.random()*12;f.style.cssText=`width:${s}px;height:${s}px;left:${px+(Math.random()-.5)*30}px;top:${py+(Math.random()-.5)*20}px`;g.appendChild(f);setTimeout(()=>f.remove(),900)}
- function wipe(px,py){x.save();x.globalCompositeOperation='destination-out';const r=Math.max(22,W*.06);const pts=last?Math.max(1,Math.hypot(px-last[0],py-last[1])/(r/3)):1;for(let i=0;i<=pts;i++){const ix=last?last[0]+(px-last[0])*i/pts:px,iy=last?last[1]+(py-last[1])*i/pts:py;const gr=x.createRadialGradient(ix,iy,0,ix,iy,r);gr.addColorStop(0,'rgba(0,0,0,.9)');gr.addColorStop(.7,'rgba(0,0,0,.5)');gr.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=gr;x.beginPath();x.arc(ix,iy,r,0,6.28);x.fill()}x.restore();last=[px,py];foam(px,py);
-  if(++tick%5===0){pct=Math.min(100,Math.round((1-count()/total)*100));$('#gM').style.width=pct+'%';$('#gT').textContent=`Чисто на ${pct}%`;mood();if(pct>=92&&!done)finish()}}
- function finish(){done=true;x.clearRect(0,0,W,H);pct=100;$('#gM').style.width='100%';$('#gT').textContent='Чисто на 100% ✨';talk(G.fin);mood();setTimeout(()=>$('#gDone').classList.add('on'),900);$('#gH').style.opacity=0;burst()}
- function burst(){const r=g.getBoundingClientRect();for(let i=0;i<26;i++){const b=document.createElement('i');const s=10+Math.random()*26;b.style.cssText=`position:fixed;z-index:70;pointer-events:none;width:${s}px;height:${s}px;border-radius:50%;left:${r.left+r.width/2}px;top:${r.top+r.height/2}px;background:radial-gradient(circle at 30% 30%,#fff,#bdf0d3 60%,#d9f45e);border:1px solid #fff;transition:transform 1.4s cubic-bezier(.1,.8,.2,1),opacity 1.4s`;document.body.appendChild(b);requestAnimationFrame(()=>{b.style.transform=`translate(${(Math.random()-.5)*r.width*1.2}px,${(Math.random()-.7)*r.height}px)`;b.style.opacity=0});setTimeout(()=>b.remove(),1500)}}
- function reset(){done=false;pct=0;said=-1;tick=0;$('#gDone').classList.remove('on');$('#gH').style.opacity=1;$('#gM').style.width='0';$('#gT').textContent=G.t0;seed();geo();paint();mood()}
+ function part(big){const f=document.createElement('i');f.className='pf';const R=Math.random;let s=big?12+R()*24:7+R()*12,css='';
+  if(FX==='gear'){const gear=R()<.55;f.textContent=gear?'⚙':'✦';css=`font-size:${s+6}px;color:${gear?['#8a93a3','#5d6675','#b8c0cc'][R()*3|0]:['#FFC94D','#FFE9A8','#fff'][R()*3|0]};text-shadow:0 1px 0 #0003;--rot:${(R()-.5)*500}deg;--sc:.6;`}
+  else if(FX==='dust'){s*=1.9;css=`width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle,#b79a78cc 0,#b79a7866 45%,#b79a7800 70%);--rot:0deg;--sc:1.9;`}
+  else if(FX==='puff'){s*=1.9;css=`width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle,#ffffffee 0,#eafff2aa 45%,#eafff200 70%);--rot:0deg;--sc:2;`}
+  else css=`width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff,#e9fbf1 60%,var(--mint));border:1px solid #fff;--rot:0deg;--sc:.4;`;
+  f._css=css;return f}
+ function fx(px,py){if(Math.random()>.4)return;const f=part(false),R=Math.random;f.style.cssText=f._css+`left:${px+(R()-.5)*30}px;top:${py+(R()-.5)*20}px;--dx:${(R()-.5)*(FX==='foam'?10:70)}px;--dy:${FX==='gear'?(R()-.6)*70:-20-R()*30}px`;g.appendChild(f);setTimeout(()=>f.remove(),900)}
+ function wipe(px,py){const r=Math.max(22,W*.06);x.save();x.globalCompositeOperation='destination-out';const n=last?Math.max(1,Math.hypot(px-last[0],py-last[1])/(r/3)):1;for(let i=0;i<=n;i++){const ix=last?last[0]+(px-last[0])*i/n:px,iy=last?last[1]+(py-last[1])*i/n:py;const gr=x.createRadialGradient(ix,iy,0,ix,iy,r);gr.addColorStop(0,'rgba(0,0,0,.95)');gr.addColorStop(.7,'rgba(0,0,0,.6)');gr.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=gr;x.beginPath();x.arc(ix,iy,r,0,6.28);x.fill()}x.restore();
+  const ax=last?last[0]:px,ay=last?last[1]:py,bx=px-ax,by=py-ay,l2=bx*bx+by*by||1,rr=r*r;
+  for(const p of P){if(!p[2])continue;let t=((p[0]-ax)*bx+(p[1]-ay)*by)/l2;t=t<0?0:t>1?1:t;const dx=p[0]-ax-bx*t,dy=p[1]-ay-by*t;if(dx*dx+dy*dy<rr){p[2]=0;left--}}
+  last=[px,py];fx(px,py);
+  const np=Math.min(100,Math.round((1-left/total)*100));if(np!==pct){pct=np;$('#gM').style.width=pct+'%';$('#gT').textContent=`${G.pre||'Чисто'} на ${pct}%`;mood()}
+  if(pct>=90&&!done)finish()}
+ function finish(){done=true;x.clearRect(0,0,W,H);pct=100;$('#gM').style.width='100%';$('#gT').textContent=`${G.pre||'Чисто'} на 100% ✨`;talk(G.fin);mood();setTimeout(()=>$('#gDone').classList.add('on'),900);$('#gH').style.opacity=0;sp.style.opacity=0;burst()}
+ function burst(){const R=Math.random;for(let i=0;i<24;i++){const b=part(true);b.style.cssText=b._css+`left:${W/2}px;top:${H/2}px;z-index:7;animation-duration:1.4s;--dx:${(R()-.5)*W}px;--dy:${(R()-.6)*H*.8}px`;g.appendChild(b);setTimeout(()=>b.remove(),1500)}}
+ function reset(){done=false;pct=0;said=-1;$('#gDone').classList.remove('on');$('#gH').style.opacity=1;$('#gM').style.width='0';$('#gT').textContent=G.t0;seed();geo();paint();mood()}
  const pos=e=>{const r=g.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]};
- /* глазки следят за губкой */
  const pupils=g.querySelectorAll('.pupil');function look(px,py){const cx=ox+G.fc[0]*sc,cy=oy+G.fc[1]*sc;const a=Math.atan2(py-cy,px-cx),d=Math.min(4,Math.hypot(px-cx,py-cy)/40);pupils.forEach(p=>p.style.transform=`translate(${Math.cos(a)*d}px,${Math.sin(a)*d}px)`)}
- g.addEventListener('pointerdown',e=>{if(e.target.closest('.reset,.done a'))return;down=true;last=null;g.setPointerCapture(e.pointerId);const[px,py]=pos(e);sp.style.left=px+'px';sp.style.top=py+'px';sp.style.opacity=1;if(!done)wipe(px,py)});
- g.addEventListener('pointermove',e=>{const[px,py]=pos(e);sp.style.left=px+'px';sp.style.top=py+'px';if(e.pointerType==='mouse'||down)sp.style.opacity=1;look(px,py);if(down&&!done)wipe(px,py)});
- const up=()=>{down=false;last=null};g.addEventListener('pointerup',up);g.addEventListener('pointercancel',up);g.addEventListener('pointerleave',()=>{sp.style.opacity=0});
+ let raf=0,pend=null;
+ function move(px,py){sp.style.left=px+'px';sp.style.top=py+'px';look(px,py);if(down&&!done)wipe(px,py)}
+ hit.addEventListener('pointerdown',e=>{if(done)return;down=true;last=null;try{hit.setPointerCapture(e.pointerId)}catch(_){}const[px,py]=pos(e);sp.style.opacity=1;move(px,py)});
+ hit.addEventListener('pointermove',e=>{if(done)return;if(e.pointerType==='mouse'||down)sp.style.opacity=1;pend=pos(e);if(!raf)raf=requestAnimationFrame(()=>{raf=0;if(pend)move(pend[0],pend[1])})});
+ const up=e=>{down=false;last=null;if(e&&e.pointerType!=='mouse')sp.style.opacity=0};hit.addEventListener('pointerup',up);hit.addEventListener('pointercancel',up);hit.addEventListener('pointerleave',()=>{if(!down)sp.style.opacity=0});
  $('#gR').onclick=reset;
  $('#gT').textContent=G.t0;seed();requestAnimationFrame(()=>{geo();paint();mood()});
- let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(!done){geo();paint();pct=0;mood()}},200)});
+ /* на телефоне прокрутка шлёт resize: перерисовываем только если реально изменилась ширина */
+ let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{const w=g.getBoundingClientRect().width;if(!done&&Math.abs(w-W)>2){geo();paint();pct=0;$('#gM').style.width='0';mood()}},250)});
 })();
 </script>
 </body>
