@@ -450,21 +450,21 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
   <div class="rv">
     <div class="game" id="game">
       <div class="hud"><span class="t" id="gT"></span><span class="r"><span class="meter"><i id="gM"></i></span><button class="reset" id="gR" aria-label="Заново" title="Заново">↻</button></span></div><div class="say" id="say"></div>
-      <svg class="base" viewBox="0 0 400 230" aria-hidden="true"><ellipse cx="200" cy="224" rx="110" ry="7" fill="#1e1a2e22"/>
-<rect x="118" y="6" width="164" height="214" rx="20" fill="#fff" stroke="#1E1A2E" stroke-width="4"/>
-<line x1="118" y1="50" x2="282" y2="50" stroke="#1E1A2E" stroke-width="3"/>
-<rect x="134" y="18" width="52" height="20" rx="6" fill="#1E1A2E"/><text x="160" y="33" font-family="monospace" font-size="13" fill="#FFB547" text-anchor="middle">--:--</text>
-<circle cx="236" cy="28" r="9" fill="#FFE2BF" stroke="#1E1A2E" stroke-width="3"/><circle cx="262" cy="28" r="5" fill="#1E1A2E"/>
-<circle cx="200" cy="134" r="62" fill="#E9E6F2" stroke="#1E1A2E" stroke-width="4"/>
-<circle cx="200" cy="134" r="46" fill="#BFE3FF" stroke="#1E1A2E" stroke-width="3"/>
-<path d="M162 140 q20 -14 38 0 t38 0 v20 q-38 28 -76 0z" fill="#8CC8F5" opacity=".7"/></svg>
+      <svg class="base" viewBox="0 0 400 230" aria-hidden="true">
+<path d="M0 0 H400 L300 150 H100 Z" fill="#F4F9FF" stroke="#1E1A2E" stroke-width="4" stroke-linejoin="round"/>
+<path d="M0 0 L100 150 V226 L0 230 Z" fill="#FFE9CF" stroke="#1E1A2E" stroke-width="3" stroke-linejoin="round"/>
+<path d="M400 0 L300 150 V226 L400 230 Z" fill="#FFE9CF" stroke="#1E1A2E" stroke-width="3" stroke-linejoin="round"/>
+<rect x="100" y="150" width="200" height="76" fill="#FFF3E2" stroke="#1E1A2E" stroke-width="3"/>
+<rect x="170" y="166" width="60" height="44" rx="4" fill="#BFE3FF" stroke="#1E1A2E" stroke-width="3"/><path d="M200 166v44M170 188h60" stroke="#1E1A2E" stroke-width="2"/>
+<path d="M40 20 Q120 12 190 22" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+<g fill="#FFE07A" stroke="#1E1A2E" stroke-width="2.5"><circle cx="60" cy="22" r="7"/><circle cx="340" cy="22" r="7"/><circle cx="118" cy="124" r="6"/><circle cx="282" cy="124" r="6"/></g></svg>
       <canvas id="dirt"></canvas>
       <svg class="face" viewBox="0 0 400 230" aria-hidden="true"><g id="eyes"><ellipse cx="172" cy="120" rx="15" ry="17" fill="#fff" stroke="#0F2A25" stroke-width="3.5"/><ellipse cx="228" cy="120" rx="15" ry="17" fill="#fff" stroke="#0F2A25" stroke-width="3.5"/>
 <circle class="pupil" cx="174" cy="123" r="7" fill="#0F2A25"/><circle class="pupil" cx="230" cy="123" r="7" fill="#0F2A25"/>
 <circle cx="177" cy="119" r="2.4" fill="#fff"/><circle cx="233" cy="119" r="2.4" fill="#fff"/></g><ellipse cx="150" cy="143" rx="10" ry="5" fill="#FF9A8A" opacity=".55"/><ellipse cx="250" cy="143" rx="10" ry="5" fill="#FF9A8A" opacity=".55"/><path id="mouth" d="M186 148 Q200 140 214 148" fill="none" stroke="#0F2A25" stroke-width="3.5" stroke-linecap="round"/></svg>
       <div class="sponge" id="sponge"></div>
-      <div class="hint" id="gH">Зажмите и водите ключом по поломкам</div>
-      <div class="done" id="gDone"><div><b>Готово!</b>Так же починят вашу технику<br><a href="#price">Собрать заказ →</a></div></div>
+      <div class="hint" id="gH">Зажмите и водите тряпкой по пятнам</div>
+      <div class="done" id="gDone"><div><b>Готово!</b>Так же сделают ваш потолок<br><a href="#price">Собрать заказ →</a></div></div>
     </div>
   </div>
 </section>
@@ -510,7 +510,7 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
 <!-- HOW -->
 <section>
   <div class="rv"><span class="kick">Как всё проходит</span><h2>Без долгих переписок</h2></div>
-  <div class="how"><div class="rv"><h3>Опишите поломку</h3><p>Выберите технику и что с ней случилось.</p></div><div class="rv"><h3>Пришлите фото</h3><p>Фото ошибки или модели поможет мастеру.</p></div><div class="rv"><h3>Договоритесь о времени</h3><p>Выберите удобный день.</p></div><div class="rv"><h3>Техника работает</h3><p>Мастер приедет и починит.</p></div></div>
+  <div class="how"><div class="rv"><h3>Посчитайте потолок</h3><p>Площадь, полотно и светильники в калькуляторе.</p></div><div class="rv"><h3>Пришлите фото</h3><p>Фото комнаты поможет мастеру.</p></div><div class="rv"><h3>Договоритесь о времени</h3><p>Выберите удобный день.</p></div><div class="rv"><h3>Потолок готов</h3><p>Замер, монтаж и уборка за собой.</p></div></div>
 </section>
 
 <!-- FORM + OWNER VIEW -->
@@ -526,7 +526,7 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
         <label>Удобный день<input name="date" type="date"></label>
         <label>Время<select name="time"><option value="">Любое</option><option>Утром</option><option>Днём</option><option>Вечером</option></select></label>
         <label class="full">Что важно знать<textarea name="note" rows="3" placeholder="Например: стиральная машина Bosch, не сливает воду"></textarea></label>
-        <label class="drop"><input type="file" id="files" accept="image/*" multiple><b>📷 Добавьте фото техники или ошибки</b><br><small>Так мастер поймёт поломку заранее</small><div class="thumbs" id="thumbs"></div></label>
+        <label class="drop"><input type="file" id="files" accept="image/*" multiple><b>📷 Добавьте фото комнаты</b><br><small>Так мастер заранее поймёт объём работ</small><div class="thumbs" id="thumbs"></div></label>
       </div>
       <div class="sendrow">
         <button type="submit" class="btn main mag">Отправить заявку мастеру <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
@@ -601,10 +601,10 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
 </section>
 
 <script>
-const CFG={"wa": "79130306507", "svc": [{"id": "s0", "t": "Натяжные потолки с установкой в однокомнатную квартиру", "p": 17800, "pcs": false, "flag": true, "img": "", "d": "Цена по прайсу в 2ГИС.", "from": 0}, {"id": "s1", "t": "Натяжные потолки с установкой в двухкомнатную квартиру", "p": 33400, "pcs": false, "flag": true, "img": "", "d": "Цена по прайсу в 2ГИС.", "from": 0}, {"id": "s2", "t": "Натяжные потолки с установкой в трёхкомнатную квартиру", "p": 51000, "pcs": false, "flag": true, "img": "", "d": "Цена по прайсу в 2ГИС.", "from": 0}], "rev": [], "gal": ["https://i4.photo.2gis.com/images/profile/30258560103960824_b99b_1920x.jpg", "https://i4.photo.2gis.com/images/profile/844424974207134_b6e4_1920x.jpg", "https://i5.photo.2gis.com/images/profile/30258560168918830_a414_1920x.jpg", "https://i1.photo.2gis.com/images/profile/30258560052439675_45cd_1920x.jpg", "https://i7.photo.2gis.com/images/profile/844424968421803_4b37_1920x.jpg", "https://i0.photo.2gis.com/images/profile/844424951878350_013c_1920x.jpg", "https://i0.photo.2gis.com/images/profile/844424970223700_e114_1920x.jpg", "https://i7.photo.2gis.com/images/profile/844424968131197_4b1f_1920x.jpg"], "marq": ["Натяжные потолки с установкой в однокомнатную квартиру", "Натяжные потолки с установкой в двухкомнатную квартиру", "Натяжные потолки с установкой в трёхкомнатную квартиру", "Красноярск"], "greet": "Здравствуйте! Хочу оставить заявку:", "who": "Мастер", "whoF": false, "city": "Красноярск", "exnote": "Стиральная машина, не сливает воду", "ex": [["s0", 1], ["s1", 1]], "ic": "🔧", "game": {"rects": [[118, 6, 164, 214, 20]], "seedR": [0], "col": ["#6f6a5a", "#a0663a", "#5a5548", "#8b6b45"], "say": [[0, "Я сломалась и грущу 😵"], [25, "Ой, уже лучше!"], [55, "Барабан крутится!"], [80, "Почти готова!"]], "fin": "Я снова стираю! Спасибо! 🎉", "t0": "Почините машинку 👆", "fc": [200, 120], "mouths": ["M186 148 Q200 140 214 148", "M186 145 Q200 148 214 145", "M184 143 Q200 154 216 143", "M182 141 Q200 160 218 141"], "crack": false, "bug": false}};
+const CFG={"wa": "79130306507", "svc": [{"id": "s0", "t": "Натяжные потолки с установкой в однокомнатную квартиру", "p": 17800, "pcs": false, "flag": true, "img": "", "d": "Цена по прайсу в 2ГИС.", "from": 0}, {"id": "s1", "t": "Натяжные потолки с установкой в двухкомнатную квартиру", "p": 33400, "pcs": false, "flag": true, "img": "", "d": "Цена по прайсу в 2ГИС.", "from": 0}, {"id": "s2", "t": "Натяжные потолки с установкой в трёхкомнатную квартиру", "p": 51000, "pcs": false, "flag": true, "img": "", "d": "Цена по прайсу в 2ГИС.", "from": 0}], "rev": [], "gal": ["https://i4.photo.2gis.com/images/profile/30258560103960824_b99b_1920x.jpg", "https://i4.photo.2gis.com/images/profile/844424974207134_b6e4_1920x.jpg", "https://i5.photo.2gis.com/images/profile/30258560168918830_a414_1920x.jpg", "https://i1.photo.2gis.com/images/profile/30258560052439675_45cd_1920x.jpg", "https://i7.photo.2gis.com/images/profile/844424968421803_4b37_1920x.jpg", "https://i0.photo.2gis.com/images/profile/844424951878350_013c_1920x.jpg", "https://i0.photo.2gis.com/images/profile/844424970223700_e114_1920x.jpg", "https://i7.photo.2gis.com/images/profile/844424968131197_4b1f_1920x.jpg"], "marq": ["Натяжные потолки с установкой в однокомнатную квартиру", "Натяжные потолки с установкой в двухкомнатную квартиру", "Натяжные потолки с установкой в трёхкомнатную квартиру", "Красноярск"], "greet": "Здравствуйте! Хочу оставить заявку:", "who": "Мастер", "whoF": false, "city": "Красноярск", "exnote": "Зал 18 м², нужен потолок со светильниками", "ex": [["s0", 1], ["s1", 1]], "ic": "🔧", "game": {"rects": [[96, 14, 208, 120, 0]], "seedR": [0], "col": ["#b39b6e", "#9a8d76", "#c4ac80", "#7f7766"], "say": [[0, "Меня залили соседи 😵"], [25, "Ой, уже лучше!"], [55, "Натягиваюсь!"], [80, "Почти идеально!"]], "fin": "Я снова ровный и белый! 🎉", "t0": "Обновите потолок 👆", "fc": [200, 120], "mouths": ["M186 148 Q200 140 214 148", "M186 145 Q200 148 214 145", "M184 143 Q200 154 216 143", "M182 141 Q200 160 218 141"], "crack": false, "bug": false}};
 const WA=CFG.wa,SVC=CFG.svc,REV=CFG.rev,GAL=CFG.gal;
 const IMG=s=>s.replace('{height}','600').replace('{width}','800');
-Object.assign(CFG.game,{"tool": "wrench", "fx": "gear", "crack": true, "pre": "Починено"});
+Object.assign(CFG.game,{"tool": "rag", "fx": "foam", "crack": false, "pre": "Готово"});
 (()=>{const M=[[/диван|мебел/i,'🛋️'],[/кресл|стул|пуф/i,'🪑'],[/матрас|кроват/i,'🛏️'],[/ковр|ковёр|ковер|ворс/i,'🧶'],[/окн|остекл|створ|балкон|фасад/i,'🪟'],[/штор|тюл/i,'🪟'],[/стирал|люк|барабан|подшипник|манжет|шланг|насос|фильтр|тэн|ремн|амортизатор|протеч/i,'🧺'],[/холодил/i,'🧊'],[/посудомо|посуд/i,'🍽️'],[/кофе/i,'☕'],[/телевиз|подсветк/i,'📺'],[/ноутбук|матриц|клавиатур|windows|ос |систем/i,'💻'],[/компьютер|пк|видеокарт|ssd/i,'🖥️'],[/аккумулятор|батаре/i,'🔋'],[/экран|диспле|стекл|смартфон|телефон|iphone|android|камер|разъ/i,'📱'],[/диагност/i,'🔍'],[/пылесос/i,'🧹'],[/свч|микроволн|духов|плит|варочн|гриль/i,'🍳'],[/утюг|парогенератор|фен/i,'💨'],[/кондиционер|вытяж/i,'❄️'],[/водонагрев|бойлер/i,'🚿'],[/таракан|клоп|муравь|мокриц|насеком|клещ|комар/i,'🪳'],[/мыш|крыс|грызун/i,'🐭'],[/запах|озон/i,'🌬️'],[/ремонт.*(дрел|перфоратор|болгарк|шуруповёрт|шуруповерт|молотк|пил|триммер)|садов|снегоубор|культиватор|мойк/i,'🛠️'],[/после ремонта|строит/i,'🧱'],[/генеральн/i,'✨'],[/уборк|клининг/i,'🧽'],[/выезд/i,'🚗'],[/перенос данных|прошивк|разблокир/i,'💾']];SVC.forEach(s=>{if(s.img||s.ic)return;const m=M.find(a=>a[0].test(s.t));if(m)s.ic=m[1]})})();
 const rub=n=>Math.round(n).toLocaleString('ru-RU').replace(/ /g,' ')+' ₽';
 const $=s=>document.querySelector(s);
