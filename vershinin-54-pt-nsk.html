@@ -401,6 +401,11 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
 .pcalc .res button{margin-top:auto;padding:16px;border:0;border-radius:14px;background:var(--lime);color:var(--ink);font-weight:800;font-size:16px;cursor:pointer}
 .pcalc .res button.ok{background:#fff}
 @media(max-width:820px){.pcalc{grid-template-columns:1fr;padding:18px}.pcalc .f{grid-template-columns:1fr 1fr}}
+.ptry{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.ptry b{width:100%;text-align:center;font:700 14px Manrope;color:var(--mut)}
+.ptry button{font:700 14px Manrope;padding:10px 14px;border-radius:30px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.ptry button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+@keyframes tw{50%{opacity:.25}}.stars circle{animation:tw 2.4s infinite}.stars circle:nth-child(3n){animation-delay:.8s}.stars circle:nth-child(3n+1){animation-delay:1.6s}
 </style>
 <style>:root{--lime:#FFB547;--mint:#FFE2BF;--mint2:#FFF2E2;--ink:#1E1A2E;--ink2:#36304d}</style>
 </head>
@@ -442,7 +447,7 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
   <div class="rv">
     <span class="kick">Установка натяжных потолков · Новосибирск</span>
     <h1>Натяжные потолки <em>под ключ</em></h1>
-    <p class="lead">Вершинин 54: натяжные потолки. Соберите заказ на сайте, сразу увидите цену и отправите заявку.</p>
+    <p class="lead">Вершинин 54: натяжные потолки с замером, монтажем и светильниками. Посчитайте потолок на сайте и отправьте заявку за минуту.</p>
     <div class="chips"><span class="chip">Натяжные потолки <b data-id="s0">по запросу</b></span></div>
     <div class="cta"><a class="btn main mag" href="#price">Посчитать заказ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn ghost mag" href="#otzyvy">Отзывы</a></div>
     <div class="stat"><div><b>4,9</b>рейтинг в 2ГИС</div><div><b>29</b>отзывов</div><div><b>08:00–20:00</b>часы работы</div></div>
@@ -465,7 +470,7 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
       <div class="sponge" id="sponge"></div>
       <div class="hint" id="gH">Зажмите и водите тряпкой по пятнам</div>
       <div class="done" id="gDone"><div><b>Готово!</b>Так же сделают ваш потолок<br><a href="#price">Собрать заказ →</a></div></div>
-    </div>
+    </div><div class="ptry"><b>Примерьте потолок в комнате</b><button type="button" class="on" data-pt="mat">Матовый</button><button type="button" data-pt="gl">Глянец</button><button type="button" data-pt="sky">Звёздное небо</button><button type="button" data-pt="led">Парящий с подсветкой</button></div>
   </div>
 </section>
 </main>
@@ -525,7 +530,7 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
         <label class="full">Адрес<input name="addr" placeholder="Улица, дом, район или пригород"></label>
         <label>Удобный день<input name="date" type="date"></label>
         <label>Время<select name="time"><option value="">Любое</option><option>Утром</option><option>Днём</option><option>Вечером</option></select></label>
-        <label class="full">Что важно знать<textarea name="note" rows="3" placeholder="Например: стиральная машина Bosch, не сливает воду"></textarea></label>
+        <label class="full">Что важно знать<textarea name="note" rows="3" placeholder="Например: высота потолка 2,7 м, нужна ниша под шторы"></textarea></label>
         <label class="drop"><input type="file" id="files" accept="image/*" multiple><b>📷 Добавьте фото комнаты</b><br><small>Так мастер заранее поймёт объём работ</small><div class="thumbs" id="thumbs"></div></label>
       </div>
       <div class="sendrow">
@@ -540,13 +545,13 @@ footer{text-align:center;padding:40px 20px 120px;color:var(--mut);font-size:13px
         <div class="ord" id="ord">
           <span class="st" id="ordSt">● Новая заявка</span>
           <h4 id="oName">Имя клиента</h4>
-          <ul id="oList"><li>Выберите мебель выше ↑</li></ul>
+          <ul id="oList"><li>Посчитайте потолок выше ↑</li></ul>
           <div class="ph2" id="oPh"><i></i><i></i></div>
           <div class="sum"><span>Примерно</span><span id="oSum">0 ₽</span></div>
           <ul><li id="oAddr">📍 Адрес</li><li id="oWhen">🗓 День и время</li></ul>
           <div class="acts" style="margin-top:12px"><button class="y" id="okBtn">Согласовать</button><button id="tBtn">Другое время</button></div>
         </div>
-        <div class="older"><span>Холодильник, не морозит</span><b>Выполнено ✓</b></div>
+        <div class="older"><span>Зал 18 м², глянец, 6 светильников</span><b>Выполнено ✓</b></div>
       </div></div>
       <p class="cap">Так заявка выглядит в кабинете мастера</p><p style="text-align:center"><a class="btn ghost cablink" href="#kabinet">Открыть кабинет мастера →</a></p>
     </div>
@@ -636,7 +641,7 @@ function upd(src){const c=cart();
  $('#clr').style.display=c.items.length?'':'none';
  anim($('#dTot'),c.sum);anim($('#dockSum'),c.sum);anim($('#oSum'),c.sum);
  const cn=$('#dockCnt');cn.textContent=c.cnt;cn.classList.toggle('on',c.cnt>0);
- $('#oList').innerHTML=c.items.map(it=>`<li>${it.t.replace('Химчистка ','')}${it.p==null?': уточнить':' × '+it.n}</li>`).join('')||'<li>Выберите мебель выше ↑</li>';
+ $('#oList').innerHTML=c.items.map(it=>`<li>${it.t.replace('Химчистка ','')}${it.p==null?': уточнить':' × '+it.n}</li>`).join('')||'<li>Посчитайте потолок выше ↑</li>';
  const t=$('#dockTab');if(src!==undefined){t.classList.remove('bump');void t.offsetWidth;t.classList.add('bump')}
  if(src&&src.getBoundingClientRect)bubbleBurst(src);
  $('#ordSt').className='st';$('#ordSt').textContent='● Новая заявка';
@@ -809,5 +814,11 @@ function add(silent){const r=calc();CALC={on:1,t:r.desc+(r.sum!=null?` (≈ ${R(
 $('#pc_add').onclick=()=>add(false);calc();
 })();
 </script>
-</body>
+<script>(()=>{const b=document.querySelector('#game svg.base');if(!b)return;const c=b.querySelector('path');const NS='http://www.w3.org/2000/svg';
+const g=document.createElementNS(NS,'g');g.style.pointerEvents='none';b.insertBefore(g,c.nextSibling);
+const T={mat:()=>{c.setAttribute('fill','#F4F9FF');return''},
+gl:()=>{c.setAttribute('fill','#E6F2FF');return'<path d="M20 6 L150 6 L120 60 Z" fill="#fff" opacity=".85"/><path d="M175 8 L215 8 L190 46 Z" fill="#fff" opacity=".7"/><ellipse cx="200" cy="120" rx="70" ry="10" fill="#fff" opacity=".35"/>'},
+sky:()=>{c.setAttribute('fill','#1B2350');let s='<g class="stars">';for(let i=0;i<46;i++){const y=4+Math.random()*140,h=200-(y/150)*100,x=200+(Math.random()*2-1)*(h-8);s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(Math.random()*1.8+.6).toFixed(1)}" fill="#fff"/>`}return s+'</g>'},
+led:()=>{c.setAttribute('fill','#F4F9FF');return'<path d="M6 3 H394 L298 147 H102 Z" fill="none" stroke="#7FD4FF" stroke-width="7" opacity=".55" style="filter:blur(3px)"/><path d="M6 3 H394 L298 147 H102 Z" fill="none" stroke="#BFF0FF" stroke-width="2.5"/>'}};
+document.querySelectorAll('.ptry [data-pt]').forEach(x=>x.onclick=()=>{document.querySelectorAll('.ptry button').forEach(y=>y.classList.toggle('on',y===x));g.innerHTML=T[x.dataset.pt]()});})();</script></body>
 </html>
